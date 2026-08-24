@@ -1,0 +1,37 @@
+rules_version = '2';
+
+// Security Rules pour les collections de l'app Veille (ex-FaithFocus).
+// Contraintes appliquées (cf. section "Sécurité transverse" du projet) :
+// - OWASP Mobile M3 / API1 (Broken Authentication) : toute opération exige
+//   un utilisateur authentifié (request.auth != null) — auth anonyme, cf.
+//   `AuthService`, il n'y a pas d'écran de connexion dans le design.
+// - OWASP API5 (Broken Function Level Authorization) : un utilisateur ne
+//   peut lire/écrire que son propre profil et ses propres dissertations
+//   (request.auth.uid == userId), jamais ceux d'un tiers.
+// - Règle de repli explicite en fin de fichier : tout ce qui n'est pas
+//   listé ci-dessous est refusé par défaut (fail closed).
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Profil utilisateur : réglages (heure de déblocage, applications
+    // autorisées, mode sombre) et statistiques (streak, études terminées,
+    // temps rendu à Dieu). Un seul document par utilisateur, entièrement
+    // sous son contrôle — aucune valeur ici n'est utilisée comme source de
+    // vérité anti-triche (contrairement à l'ancien module quiz).
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Dissertations soumises à la fin d'une étude thématique (ou modifiées
+    // depuis le Profil).
+    match /users/{userId}/dissertations/{dissertationId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Refus par défaut de tout ce qui n'est pas explicitement autorisé
+    // ci-dessus.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

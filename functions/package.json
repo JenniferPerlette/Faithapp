@@ -1,0 +1,29 @@
+{
+  "name": "functions",
+  "description": "Cloud Functions FaithFocus (Tâche 9 : soumission de leçon et leaderboard hebdomadaire).",
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "test": "node --import tsx ./node_modules/mocha/bin/mocha.js src/**/*.spec.ts",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "deploy": "firebase deploy --only functions"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.0.2",
+    "firebase-functions": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.9",
+    "@types/node": "^22.10.1",
+    "mocha": "^10.8.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.23.5",
+    "typescript": "^5.7.2"
+  },
+  "private": true
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Synchronisé manuellement avec lib/core/theme/app_colors.dart (palette
+  plate unique du projet — cf. contraintes de design transverses). Toute
+  modification de la palette Dart doit être reportée ici.
+-->
+<resources>
+    <color name="ff_primary">#2F5233</color>
+    <color name="ff_accent">#C9A24B</color>
+    <color name="ff_background">#FAF9F6</color>
+    <color name="ff_surface">#FFFFFF</color>
+    <color name="ff_text_secondary">#6B7280</color>
+    <color name="ff_text_primary">#1F2937</color>
+    <color name="ff_success">#2E7D32</color>
+    <color name="ff_error">#B3261E</color>
+</resources>

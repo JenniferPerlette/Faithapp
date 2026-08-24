@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="accessibility_service_description">
+        FaithFocus utilise ce service uniquement pour détecter, pendant une
+        session Jeûne Digital active, l\'ouverture d\'une application non
+        autorisée par vous et vous proposer de revenir à l\'essentiel. Il ne
+        lit jamais le contenu des autres applications.
+    </string>
+</resources>
